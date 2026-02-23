@@ -4,11 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import Navbar from "./navbar/NavBar";
 import Footer from "./footer/Footer";
-import "./App.css"; // CSS هنا قبل render
+import "./App.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/heliore-chatbot">
       <Navbar />
       <App />
       <Footer />

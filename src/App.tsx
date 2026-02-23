@@ -17,7 +17,7 @@ import Subscribe from "./footer/Subscribe";
 import Contact from "./page/contact/Contact";
 import About from "./page/about/About";
 import Blog from "./page/blog/Blog";
-import Clinics from "./page/clinics/Clinics";
+import Clinics from "../src/page/jobs/components/Calendar";
 import Department from "./page/department/Department";
 import Doctors from "./page/doctors/Doctors";
 import Appointment from "./page/appointment/Appointment";

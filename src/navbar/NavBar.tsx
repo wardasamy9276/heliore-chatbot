@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import LanguageSwitcher from "../components/LanguageSwitcher";
 import HospitalSearchBar from "./SearchBar";
 
 const data = [
@@ -25,15 +24,17 @@ function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md p-6">
-      <div className="flex items-center justify-between">
-        <div>
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="flex items-center justify-between px-4 py-3 md:px-6 md:py-4">
+        {/* Search */}
+        <div className="flex-1">
           <HospitalSearchBar />
         </div>
 
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-2xl"
+          className="md:hidden text-2xl font-bold ml-3"
         >
           ☰
         </button>
@@ -44,29 +45,28 @@ function NavBar() {
             <NavLink
               key={item.id}
               to={item.link}
-              className={
-                ({ isActive }) =>
-                  isActive
-                    ? "text-blue-600 font-semibold" // Active ثابت أزرق
-                    : "text-gray-900 hover:text-blue-400" // غير Active عند Hover يظهر أزرق فاتح
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold"
+                  : "text-gray-800 hover:text-blue-500 transition"
               }
             >
               {item.name}
             </NavLink>
           ))}
 
-          {/* Hospital Dropdown */}
+          {/* Desktop Dropdown */}
           <div className="relative">
             <button
               onClick={() => setOpen(!open)}
-              className="flex items-center gap-1 text-gray-900"
+              className="flex items-center gap-1 text-gray-800 font-medium"
             >
               خدمات المستشفى
               <span className="text-sm">{open ? "▲" : "▼"}</span>
             </button>
 
             {open && (
-              <div className="absolute top-full mt-4 right-0 w-56 bg-white border rounded-[16px] shadow-xl z-50 flex flex-col gap-2">
+              <div className="absolute right-0 mt-3 w-56 bg-white border rounded-xl shadow-lg p-2 flex flex-col gap-1">
                 {hospitalMenu.map((item) => (
                   <NavLink
                     key={item.id}
@@ -74,8 +74,8 @@ function NavBar() {
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
                       isActive
-                        ? "block p-3 text-sm w-full text-center rounded-[8px] bg-blue-600 text-white font-semibold"
-                        : "block p-3 text-sm w-full text-center rounded-[8px] text-gray-900 hover:bg-blue-200 hover:text-blue-900"
+                        ? "block py-2 px-3 text-sm rounded-md bg-blue-600 text-white text-center font-semibold"
+                        : "block py-2 px-3 text-sm rounded-md text-gray-700 text-center hover:bg-blue-100 hover:text-blue-800"
                     }
                   >
                     {item.name}
@@ -84,62 +84,60 @@ function NavBar() {
               </div>
             )}
           </div>
-
-          <LanguageSwitcher />
         </div>
       </div>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden mt-4 flex flex-col gap-4 border-t pt-4">
-          <LanguageSwitcher />
+        <div className="md:hidden px-4 pb-4 border-t bg-white">
+          <div className="flex flex-col gap-1 mt- text-center">
+            {data.map((item) => (
+              <NavLink
+                key={item.id}
+                to={item.link}
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  isActive
+                    ? "w-full py-3 px-2 rounded-lg bg-blue-50 text-blue-600 font-semibold"
+                    : "w-full py-3 px-2 rounded-lg text-gray-700 hover:bg-gray-100"
+                }
+              >
+                {item.name}
+              </NavLink>
+            ))}
 
-          {data.map((item) => (
-            <NavLink
-              key={item.id}
-              to={item.link}
-              onClick={() => setMobileOpen(false)}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-blue-600 font-semibold"
-                  : "text-gray-700 hover:text-blue-400"
-              }
-            >
-              {item.name}
-            </NavLink>
-          ))}
+            {/* Mobile Hospital Dropdown */}
+            <div className="mt-2">
+              <button
+                onClick={() => setOpen(!open)}
+                className="w-full flex items-center justify-between py-3 px-2 rounded-lg text-gray-800 font-medium hover:bg-gray-100"
+              >
+                خدمات المستشفى
+                <span className="text-sm">{open ? "▲" : "▼"}</span>
+              </button>
 
-          {/* Mobile Hospital Menu */}
-          <div>
-            <button
-              onClick={() => setOpen(!open)}
-              className="flex items-center gap-1 text-gray-700 font-medium"
-            >
-              خدمات المستشفى
-              <span className="text-sm">{open ? "▲" : "▼"}</span>
-            </button>
-
-            {open && (
-              <div className="mt-3 ml-4 flex flex-col gap-2">
-                {hospitalMenu.map((item) => (
-                  <NavLink
-                    key={item.id}
-                    to={item.link}
-                    onClick={() => {
-                      setOpen(false);
-                      setMobileOpen(false);
-                    }}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-blue-600"
-                        : "text-gray-900 hover:text-blue-900"
-                    }
-                  >
-                    {item.name}
-                  </NavLink>
-                ))}
-              </div>
-            )}
+              {open && (
+                <div className="mt-2 flex flex-col gap-1 pl-3 border-l border-gray-200">
+                  {hospitalMenu.map((item) => (
+                    <NavLink
+                      key={item.id}
+                      to={item.link}
+                      onClick={() => {
+                        setOpen(false);
+                        setMobileOpen(false);
+                      }}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "py-2 px-2 rounded-md bg-blue-100 text-blue-700 font-semibold text-sm"
+                          : "py-2 px-2 rounded-md text-gray-700 text-sm hover:bg-gray-100"
+                      }
+                    >
+                      {item.name}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

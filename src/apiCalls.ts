@@ -1,6 +1,6 @@
-export const API_URL = "https://abcd1234.ngrok.io"; // رابط ngrok اللي شغال
+export const API_URL = "https://abcd1234.ngrok.io";
 
-export const handleCall = async (patientNumber: string) => {
+export const handleCall = async (patientNumber: string): Promise<void> => {
   try {
     const res = await fetch(`${API_URL}/voice`, {
       method: "POST",
@@ -8,7 +8,7 @@ export const handleCall = async (patientNumber: string) => {
       body: JSON.stringify({ patientNumber }),
     });
 
-    const data = await res.json();
+    const data: { message: string } = await res.json();
     alert(data.message);
   } catch (err) {
     console.error(err);

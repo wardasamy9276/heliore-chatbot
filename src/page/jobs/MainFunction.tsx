@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // تعريف TypeScript للوظائف
 interface MainFunction {
@@ -105,12 +106,12 @@ export default function MainFunctionsCards(): any {
                 </p>
               </div>
               {func.link && (
-                <a
-                  href={func.link}
+                <Link
+                  to={func.link}
                   className="mt-6 inline-block text-center bg-blue-700 text-white py-3 px-6 rounded-lg hover:bg-blue-800 transition text-lg font-semibold"
                 >
                   المزيد
-                </a>
+                </Link>
               )}
             </div>
           ))}

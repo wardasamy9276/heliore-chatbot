@@ -55,7 +55,7 @@ const EmergenciesSection: React.FC = () => {
 
   return (
     <div className="p-6 bg-gray-50 rounded-2xl">
-      <div className="flex justify-center flex-col items-center">
+      <div className="flex justify-center flex-col ">
         <h2 className="text-3xl font-bold mb-6 text-gray-800">قسم الطوارئ</h2>
         <p className="mb-2 text-gray-700">
           إجمالي الحالات: {emergencies.length}
