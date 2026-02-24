@@ -1,9 +1,6 @@
 // EmergenciesSection.tsx
 import React, { useState } from "react";
-import {
-  emergencies as initialEmergencies,
-  Emergency,
-} from "./data/emergenciesData";
+import { emergencies as initialEmergencies, Emergency } from "./data/Emergency";
 
 const EmergenciesSection: React.FC = () => {
   const [emergencies, setEmergencies] =
