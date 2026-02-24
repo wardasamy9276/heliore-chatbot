@@ -17,13 +17,15 @@ import Subscribe from "./footer/Subscribe";
 import Contact from "./page/contact/Contact";
 import About from "./page/about/About";
 import Blog from "./page/blog/Blog";
-// import Clinics from "./page/";
+import Clinics from "./page/clinics/Clinics";
 import Department from "./page/department/Department";
+
 import Doctors from "./page/doctors/Doctors";
-// import Appointment from "./page/";
+
 import Emergency from "./page/emergency/Emergency";
 import NavBar from "./navbar/NavBar";
 import Footer from "./footer/Footer";
+import Appointment from "./page/blog/appointment/appointment";
 function App() {
   return (
     <>
@@ -34,12 +36,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
-        {/* <Route path="/clinics" element={<Clinics />} /> */}
+
+        <Route path="/clinics" element={<Clinics />} />
+
         <Route path="/departments" element={<Department />} />
         <Route path="/doctors" element={<Doctors />} />
-        {/* <Route path="/appointment" element={<Appointment />} /> */}
-        <Route path="/emergency" element={<Emergency />} />
+        <Route path="/appointment" element={<Appointment />} />
 
+        <Route path="/emergency" element={<Emergency />} />
         <Route path="/calls" element={<CallPage />} />
         <Route path="/crmPage" element={<CrmPage />} />
         <Route path="/email" element={<EmailPage />} />

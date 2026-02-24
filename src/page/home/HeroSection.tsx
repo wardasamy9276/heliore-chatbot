@@ -1,9 +1,20 @@
 import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 function HeroSection() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true); // شغل الانميشن عند أول فتح
+  }, []);
+
   return (
     <section className="bg-gradient-to-l from-blue-50 to-white min-h-[80vh] flex items-center">
-      <div className="container mx-auto px-6 py-24 flex flex-col items-center text-center gap-12">
+      <div
+        className={`container mx-auto px-6 py-24 flex flex-col items-center text-center gap-12 transform transition-all duration-1000
+          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}
+        `}
+      >
         {/* Main Heading */}
         <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 leading-snug">
           رعاية صحية متكاملة

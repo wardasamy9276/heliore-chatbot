@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   FaPhoneAlt,
   FaRobot,
@@ -8,6 +9,12 @@ import {
 } from "react-icons/fa";
 
 function FeaturesSection() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true); // تشغيل الانميشن عند أول فتح
+  }, []);
+
   const features = [
     {
       icon: <FaPhoneAlt className="text-blue-600 w-8 h-8" />,
@@ -52,7 +59,13 @@ function FeaturesSection() {
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="p-6 bg-gray-50 rounded-xl shadow-lg hover:shadow-xl transition flex flex-col items-center text-center gap-4"
+              className={`p-6 bg-gray-50 rounded-xl shadow-lg hover:shadow-xl transition-all flex flex-col items-center text-center gap-4 transform
+                ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
+              `}
+              style={{
+                transitionDelay: `${idx * 150}ms`,
+                transitionDuration: "700ms",
+              }}
             >
               <div>{feature.icon}</div>
               <h3 className="text-xl font-semibold text-blue-700">
